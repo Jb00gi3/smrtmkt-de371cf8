@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
-import { ComparisonDemo } from "../ui-components/ComparisonDemo";
+import { ShoppingListDemo } from "../ui-components/ShoppingListDemo";
+import { StoreComparisonDemo } from "../ui-components/StoreComparisonDemo";
 
 export function HeroSection() {
   return (
@@ -11,9 +12,10 @@ export function HeroSection() {
       <div className="absolute -bottom-[10%] -left-[10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-3xl"></div>
       
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-20">
-          <div className="flex-1 space-y-8 max-w-xl">
-            <div className="space-y-2">
+        <div className="flex flex-col space-y-12">
+          {/* Hero text section */}
+          <div className="flex-1 space-y-8 max-w-3xl mx-auto text-center">
+            <div className="space-y-4">
               <div className="animate-fade-in-fast">
                 <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
                   Smart shopping made simple
@@ -29,9 +31,9 @@ export function HeroSection() {
               </p>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{ '--index': 3 } as React.CSSProperties}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ '--index': 3 } as React.CSSProperties}>
               <Button size="lg" className="rounded-lg">
-                Get Started
+                Build My First List
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
                   width="16" 
@@ -69,7 +71,7 @@ export function HeroSection() {
             </div>
             
             <div className="pt-4 animate-fade-in" style={{ '--index': 4 } as React.CSSProperties}>
-              <p className="text-sm text-muted-foreground flex items-center gap-2">
+              <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
                   width="15" 
@@ -88,12 +90,21 @@ export function HeroSection() {
             </div>
           </div>
           
-          {/* Demo animation */}
-          <div className="flex-1 animate-fade-in" style={{ '--index': 5 } as React.CSSProperties}>
+          {/* Two equal comparison windows */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-fade-in" style={{ '--index': 5 } as React.CSSProperties}>
+            {/* Left window: Shopping List Experience */}
             <div className="relative">
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/20 to-blue-600/20 blur-xl scale-95 -z-10 animate-pulse-subtle"></div>
               <div className="shadow-elevated rounded-xl overflow-hidden">
-                <ComparisonDemo />
+                <ShoppingListDemo />
+              </div>
+            </div>
+            
+            {/* Right window: Store Comparison */}
+            <div className="relative">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-600/20 to-primary/20 blur-xl scale-95 -z-10 animate-pulse-subtle"></div>
+              <div className="shadow-elevated rounded-xl overflow-hidden">
+                <StoreComparisonDemo />
               </div>
             </div>
           </div>
