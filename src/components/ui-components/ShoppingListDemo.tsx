@@ -1,9 +1,11 @@
 
-import React from "react";
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
 
 interface GroceryItem {
   name: string;
-  checked: boolean;
+  selected: boolean;
 }
 
 interface GroceryCategory {
@@ -12,45 +14,42 @@ interface GroceryCategory {
 }
 
 // Example shopping list data
-const shoppingListData: GroceryCategory[] = [
+const initialShoppingListData: GroceryCategory[] = [
   {
     name: "Dairy",
     items: [
-      { name: "Milk (1 gallon)", checked: true },
-      { name: "Greek Yogurt", checked: true },
-      { name: "Butter (unsalted)", checked: false },
-      { name: "Cheese (cheddar)", checked: true },
+      { name: "Milk (1 gallon)", selected: true },
+      { name: "Greek Yogurt", selected: true },
+      { name: "Butter (unsalted)", selected: false },
     ]
   },
   {
     name: "Produce",
     items: [
-      { name: "Apples", checked: true },
-      { name: "Bananas", checked: true },
-      { name: "Spinach", checked: false },
-      { name: "Bell Peppers", checked: true },
+      { name: "Apples", selected: true },
+      { name: "Bananas", selected: true },
+      { name: "Spinach", selected: false },
     ]
   },
   {
     name: "Meat",
     items: [
-      { name: "Chicken Breast", checked: true },
-      { name: "Ground Beef", checked: true },
-      { name: "Steak (ribeye)", checked: false },
-    ]
-  },
-  {
-    name: "Pantry",
-    items: [
-      { name: "Rice", checked: true },
-      { name: "Pasta", checked: true },
-      { name: "Olive Oil", checked: false },
-      { name: "Black Beans", checked: true },
+      { name: "Chicken Breast", selected: true },
+      { name: "Ground Beef", selected: false },
     ]
   }
 ];
 
 export function ShoppingListDemo() {
+  const [shoppingList, setShoppingList] = useState<GroceryCategory[]>(initialShoppingListData);
+  
+  const toggleItemSelection = (categoryIndex: number, itemIndex: number) => {
+    const updatedList = [...shoppingList];
+    updatedList[categoryIndex].items[itemIndex].selected = 
+      !updatedList[categoryIndex].items[itemIndex].selected;
+    setShoppingList(updatedList);
+  };
+
   return (
     <div className="bg-white rounded-xl overflow-hidden shadow-elevated border border-border">
       <div className="p-4 bg-secondary/50 flex justify-between items-center">
@@ -82,24 +81,29 @@ export function ShoppingListDemo() {
           <span className="text-sm font-medium">Categories</span>
         </div>
         <div className="flex items-center gap-2">
-          <button className="text-xs px-2 py-1 bg-secondary rounded-md text-muted-foreground">
+          <Button variant="secondary" size="sm" className="text-xs py-1 h-auto flex items-center gap-1">
+            <Plus className="h-3.5 w-3.5" />
             Add Item
-          </button>
+          </Button>
         </div>
       </div>
       
-      <div className="divide-y divide-border max-h-[400px] overflow-y-auto">
-        {shoppingListData.map((category, index) => (
-          <div key={index} className="py-2">
+      <div className="divide-y divide-border max-h-[300px] overflow-y-auto">
+        {shoppingList.map((category, categoryIndex) => (
+          <div key={categoryIndex} className="py-2">
             <div className="px-4 py-2">
               <h4 className="font-medium text-sm text-primary">{category.name}</h4>
             </div>
             <ul className="space-y-1">
               {category.items.map((item, itemIndex) => (
-                <li key={itemIndex} className="flex items-center px-4 py-2 hover:bg-gray-50">
+                <li 
+                  key={itemIndex} 
+                  className="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer"
+                  onClick={() => toggleItemSelection(categoryIndex, itemIndex)}
+                >
                   <div className="flex items-center gap-3 flex-1">
-                    <div className={`h-4 w-4 border rounded flex items-center justify-center ${item.checked ? 'bg-primary border-primary' : 'border-gray-300'}`}>
-                      {item.checked && (
+                    <div className={`h-5 w-5 border rounded-full flex items-center justify-center transition-colors ${item.selected ? 'bg-primary border-primary' : 'border-gray-300'}`}>
+                      {item.selected && (
                         <svg 
                           xmlns="http://www.w3.org/2000/svg" 
                           width="12" 
@@ -107,15 +111,15 @@ export function ShoppingListDemo() {
                           viewBox="0 0 24 24" 
                           fill="none" 
                           stroke="white" 
-                          strokeWidth="2" 
+                          strokeWidth="3" 
                           strokeLinecap="round" 
                           strokeLinejoin="round"
                         >
-                          <polyline points="20 6 9 17 4 12"></polyline>
+                          <path d="M20 6 9 17l-5-5"/>
                         </svg>
                       )}
                     </div>
-                    <span className={`text-sm ${item.checked ? 'text-muted-foreground' : 'text-foreground'}`}>
+                    <span className={`text-sm ${item.selected ? 'font-medium' : 'text-muted-foreground'}`}>
                       {item.name}
                     </span>
                   </div>
