@@ -22,7 +22,7 @@ export function FooterSection() {
                   <path d="M16 10a4 4 0 0 1-8 0" />
                 </svg>
               </div>
-              <span className="text-xl font-medium">PriceCompare</span>
+              <span className="text-xl font-medium">Smrt Mkt</span>
             </div>
             <p className="text-muted-foreground text-sm">
               Save time and money by finding the best prices across all your favorite stores.
@@ -61,7 +61,7 @@ export function FooterSection() {
         
         <div className="border-t border-border mt-12 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} PriceCompare. All rights reserved.
+            © {new Date().getFullYear()} Smrt Mkt. All rights reserved.
           </p>
           <div className="flex gap-4 mt-4 md:mt-0">
             <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">

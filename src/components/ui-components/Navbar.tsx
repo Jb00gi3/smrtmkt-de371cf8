@@ -41,7 +41,7 @@ export default function Navbar() {
                 <path d="M16 10a4 4 0 0 1-8 0" />
               </svg>
             </div>
-            <span className="text-xl font-medium">PriceCompare</span>
+            <span className="text-xl font-medium">Smrt Mkt</span>
           </div>
           
           <nav className="hidden md:flex items-center gap-8">
