@@ -1,9 +1,11 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -24,7 +26,7 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-md bg-primary flex items-center justify-center">
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
@@ -42,7 +44,7 @@ export default function Navbar() {
               </svg>
             </div>
             <span className="text-xl font-medium">Smrt Mkt</span>
-          </div>
+          </Link>
           
           <nav className="hidden md:flex items-center gap-8">
             <a href="#how-it-works" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
@@ -54,13 +56,22 @@ export default function Navbar() {
             <a href="#faq" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
               FAQ
             </a>
+            {location.pathname !== "/" && (
+              <Link to="/shopping-list" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+                My List
+              </Link>
+            )}
           </nav>
           
           <div className="flex items-center gap-4">
-            <Button variant="outline" size="sm" className="hidden md:inline-flex">
-              Sign In
-            </Button>
-            <Button size="sm">Get Started</Button>
+            <Link to="/login">
+              <Button variant="outline" size="sm" className="hidden md:inline-flex">
+                Sign In
+              </Button>
+            </Link>
+            <Link to="/signup">
+              <Button size="sm">Get Started</Button>
+            </Link>
           </div>
         </div>
       </div>

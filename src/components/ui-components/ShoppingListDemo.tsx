@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface GroceryItem {
   name: string;
@@ -52,9 +53,11 @@ export function ShoppingListDemo() {
           <Button variant="outline" size="sm" className="text-xs py-1 h-auto">
             Save List
           </Button>
-          <Button variant="primary" size="sm" className="text-xs py-1 h-auto">
-            See My Savings
-          </Button>
+          <Link to="/price-comparison">
+            <Button variant="default" size="sm" className="text-xs py-1 h-auto">
+              See My Savings
+            </Button>
+          </Link>
         </div>
       </div>
 
