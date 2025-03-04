@@ -5,7 +5,6 @@ import { Plus } from "lucide-react";
 
 interface GroceryItem {
   name: string;
-  selected: boolean;
 }
 
 interface GroceryCategory {
@@ -18,43 +17,45 @@ const initialShoppingListData: GroceryCategory[] = [
   {
     name: "Dairy",
     items: [
-      { name: "Milk (1 gallon)", selected: true },
-      { name: "Greek Yogurt", selected: true },
-      { name: "Butter (unsalted)", selected: false },
+      { name: "Milk (1 gallon)" },
+      { name: "Greek Yogurt" },
+      { name: "Butter (unsalted)" },
     ]
   },
   {
     name: "Produce",
     items: [
-      { name: "Apples", selected: true },
-      { name: "Bananas", selected: true },
-      { name: "Spinach", selected: false },
+      { name: "Apples" },
+      { name: "Bananas" },
+      { name: "Spinach" },
     ]
   },
   {
     name: "Meat",
     items: [
-      { name: "Chicken Breast", selected: true },
-      { name: "Ground Beef", selected: false },
+      { name: "Chicken Breast" },
+      { name: "Ground Beef" },
     ]
   }
 ];
 
 export function ShoppingListDemo() {
   const [shoppingList, setShoppingList] = useState<GroceryCategory[]>(initialShoppingListData);
-  
-  const toggleItemSelection = (categoryIndex: number, itemIndex: number) => {
-    const updatedList = [...shoppingList];
-    updatedList[categoryIndex].items[itemIndex].selected = 
-      !updatedList[categoryIndex].items[itemIndex].selected;
-    setShoppingList(updatedList);
-  };
+  const [newItemName, setNewItemName] = useState<string>("");
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   return (
     <div className="bg-white rounded-xl overflow-hidden shadow-elevated border border-border">
       <div className="p-4 bg-secondary/50 flex justify-between items-center">
         <h3 className="font-medium">My Shopping List</h3>
-        <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">Ready to Shop</span>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm" className="text-xs py-1 h-auto">
+            Save List
+          </Button>
+          <Button variant="primary" size="sm" className="text-xs py-1 h-auto">
+            See My Savings
+          </Button>
+        </div>
       </div>
 
       <div className="px-4 py-2 bg-primary/5 flex justify-between items-center border-b border-border">
@@ -80,12 +81,6 @@ export function ShoppingListDemo() {
           </svg>
           <span className="text-sm font-medium">Categories</span>
         </div>
-        <div className="flex items-center gap-2">
-          <Button variant="secondary" size="sm" className="text-xs py-1 h-auto flex items-center gap-1">
-            <Plus className="h-3.5 w-3.5" />
-            Add Item
-          </Button>
-        </div>
       </div>
       
       <div className="divide-y divide-border max-h-[300px] overflow-y-auto">
@@ -98,33 +93,25 @@ export function ShoppingListDemo() {
               {category.items.map((item, itemIndex) => (
                 <li 
                   key={itemIndex} 
-                  className="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer"
-                  onClick={() => toggleItemSelection(categoryIndex, itemIndex)}
+                  className="flex items-center px-4 py-2 hover:bg-gray-50"
                 >
                   <div className="flex items-center gap-3 flex-1">
-                    <div className={`h-5 w-5 border rounded-full flex items-center justify-center transition-colors ${item.selected ? 'bg-primary border-primary' : 'border-gray-300'}`}>
-                      {item.selected && (
-                        <svg 
-                          xmlns="http://www.w3.org/2000/svg" 
-                          width="12" 
-                          height="12" 
-                          viewBox="0 0 24 24" 
-                          fill="none" 
-                          stroke="white" 
-                          strokeWidth="3" 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round"
-                        >
-                          <path d="M20 6 9 17l-5-5"/>
-                        </svg>
-                      )}
-                    </div>
-                    <span className={`text-sm ${item.selected ? 'font-medium' : 'text-muted-foreground'}`}>
-                      {item.name}
-                    </span>
+                    <span className="text-sm font-medium">{item.name}</span>
                   </div>
                 </li>
               ))}
+              {categoryIndex === shoppingList.length - 1 && (
+                <li className="flex items-center px-4 py-2 hover:bg-gray-50 text-muted-foreground border-t border-dashed border-border/50">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="w-full justify-start text-xs py-1 h-auto flex items-center gap-1 text-muted-foreground"
+                  >
+                    <Plus className="h-3.5 w-3.5" />
+                    Add Item...
+                  </Button>
+                </li>
+              )}
             </ul>
           </div>
         ))}
