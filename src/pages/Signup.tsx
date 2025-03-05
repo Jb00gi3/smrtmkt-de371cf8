@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,7 +6,7 @@ import Navbar from "@/components/ui-components/Navbar";
 import { FooterSection } from "@/components/sections/FooterSection";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
-import { ProductPreferenceQuiz } from "@/components/ui-components/ProductPreferenceQuiz";
+import ProductPreferenceQuiz from "@/components/ui-components/ProductPreferenceQuiz";
 
 const Signup = () => {
   const navigate = useNavigate();

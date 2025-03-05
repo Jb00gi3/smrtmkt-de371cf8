@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
@@ -18,7 +19,11 @@ const options = [
   "Fair Trade"
 ];
 
-const ProductPreferenceQuiz = () => {
+interface ProductPreferenceQuizProps {
+  onComplete?: () => void;
+}
+
+const ProductPreferenceQuiz = ({ onComplete }: ProductPreferenceQuizProps) => {
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
   const [preferences, setPreferences] = useState<string[]>([]);
@@ -38,9 +43,15 @@ const ProductPreferenceQuiz = () => {
   };
 
   const handleSubmit = () => {
+    // Alert the user with the collected data
     alert(
       `Name: ${name}, Category: ${category}, Preferences: ${preferences.join(', ')}`
     );
+    
+    // Call the onComplete callback if provided
+    if (onComplete) {
+      onComplete();
+    }
   };
 
   return (
