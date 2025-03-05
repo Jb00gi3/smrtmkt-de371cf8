@@ -6,6 +6,7 @@ import { FooterSection } from "@/components/sections/FooterSection";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const PriceComparison = () => {
   return (
