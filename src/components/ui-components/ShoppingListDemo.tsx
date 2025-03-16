@@ -90,7 +90,7 @@ export function ShoppingListDemo() {
         {shoppingList.map((category, categoryIndex) => (
           <div key={categoryIndex} className="py-2">
             <div className="px-4 py-2">
-              <h4 className="font-medium text-sm text-primary">{category.name}</h4>
+              <h4 className="font-medium text-base text-primary text-left">{category.name}</h4>
             </div>
             <ul className="space-y-1">
               {category.items.map((item, itemIndex) => (
