@@ -1,7 +1,7 @@
 
 import { StepCard } from "../ui-components/StepCard";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ShoppingCart } from "lucide-react";
 
 interface HowItWorksSectionProps {
   openEmailCapture?: () => void;
