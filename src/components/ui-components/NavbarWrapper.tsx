@@ -17,11 +17,12 @@ const NavbarWrapper = ({ showLandingToggle }: NavbarWrapperProps) => {
     <div className="relative">
       <Navbar showLandingToggle={showLandingToggle} />
       
-      {showLandingToggle && (
+      {/* Only show toggle button when not on landing page and showLandingToggle is true */}
+      {showLandingToggle && !isOnLanding && (
         <div className="absolute top-4 right-4">
-          <Link to={isOnLanding ? '/' : '/landing'}>
+          <Link to="/landing">
             <Button variant="outline" size="sm">
-              {isOnLanding ? 'Main App' : 'Landing Page'}
+              Landing Page
             </Button>
           </Link>
         </div>
