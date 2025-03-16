@@ -10,7 +10,7 @@ import { toast } from "@/components/ui/use-toast";
 import NavbarWrapper from "@/components/ui-components/NavbarWrapper";
 
 const Landing = () => {
-  const [showEmailCapture, setShowEmailCapture] = useState(true);
+  const [showEmailCapture, setShowEmailCapture] = useState(false);
 
   return (
     <div className="relative min-h-screen">
@@ -25,7 +25,7 @@ const Landing = () => {
       <main>
         <HeroSection isLandingPage={true} />
         <FeaturesSection />
-        <HowItWorksSection />
+        <HowItWorksSection openEmailCapture={() => setShowEmailCapture(true)} />
         <FAQSection />
       </main>
       <FooterSection hideSections={true} />

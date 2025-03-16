@@ -1,7 +1,12 @@
 
 import { StepCard } from "../ui-components/StepCard";
+import { Button } from "@/components/ui/button";
 
-export function HowItWorksSection() {
+interface HowItWorksSectionProps {
+  openEmailCapture?: () => void;
+}
+
+export function HowItWorksSection({ openEmailCapture }: HowItWorksSectionProps) {
   return (
     <section id="how-it-works" className="py-20">
       <div className="container mx-auto px-4 md:px-6">
@@ -40,8 +45,11 @@ export function HowItWorksSection() {
                 Join thousands of smart shoppers who are saving time and money every week with our price comparison tool.
               </p>
               <div className="flex flex-wrap gap-4 mt-4">
-                <button className="inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-btn transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
-                  Try For Free
+                <Button 
+                  className="inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-btn transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                  onClick={openEmailCapture}
+                >
+                  Join the Waiting List
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     width="16" 
@@ -57,7 +65,7 @@ export function HowItWorksSection() {
                     <path d="M5 12h14"></path>
                     <path d="m12 5 7 7-7 7"></path>
                   </svg>
-                </button>
+                </Button>
               </div>
             </div>
             <div className="flex-shrink-0">
