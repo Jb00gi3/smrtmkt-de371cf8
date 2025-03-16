@@ -1,5 +1,5 @@
 
-import Navbar from "@/components/ui-components/Navbar";
+import NavbarWrapper from "@/components/ui-components/NavbarWrapper";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
@@ -9,7 +9,7 @@ import { FooterSection } from "@/components/sections/FooterSection";
 const Index = () => {
   return (
     <div className="relative min-h-screen">
-      <Navbar />
+      <NavbarWrapper showLandingToggle={true} />
       <main>
         <HeroSection />
         <FeaturesSection />
