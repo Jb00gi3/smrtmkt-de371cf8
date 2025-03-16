@@ -35,10 +35,10 @@ const Landing = () => {
       {!showEmailCapture && (
         <button 
           onClick={() => setShowEmailCapture(true)}
-          className="fixed bottom-6 right-6 bg-transparent hover:bg-primary/10 text-primary rounded-full p-4 shadow-lg z-40 transition-all"
+          className="fixed bottom-6 right-6 bg-transparent hover:bg-primary/10 rounded-full p-4 shadow-lg z-40 transition-all"
           aria-label="Join waiting list"
         >
-          <ShoppingCart size={28} className="text-primary" />
+          <ShoppingCart size={28} className="text-primary" strokeWidth={2} />
         </button>
       )}
     </div>
