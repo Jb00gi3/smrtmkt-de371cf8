@@ -22,9 +22,9 @@ const Landing = () => {
         </div>
       )}
       
-      <main>
+      <main className="space-y-12">
         <HeroSection isLandingPage={true} />
-        <FeaturesSection />
+        {/* FeaturesSection hidden per request */}
         <HowItWorksSection openEmailCapture={() => setShowEmailCapture(true)} />
         <FAQSection />
       </main>
