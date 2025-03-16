@@ -8,7 +8,6 @@ import { FooterSection } from "@/components/sections/FooterSection";
 import { EmailCaptureForm } from "@/components/ui-components/EmailCaptureForm";
 import { toast } from "@/components/ui/use-toast";
 import NavbarWrapper from "@/components/ui-components/NavbarWrapper";
-import { ShoppingCart } from "lucide-react";
 
 const Landing = () => {
   const [showEmailCapture, setShowEmailCapture] = useState(false);
@@ -31,14 +30,18 @@ const Landing = () => {
       </main>
       <FooterSection hideSections={true} />
       
-      {/* Floating Email Capture Button with Shopping Cart Icon */}
+      {/* Floating Email Capture Button with Shopping Cart Image */}
       {!showEmailCapture && (
         <button 
           onClick={() => setShowEmailCapture(true)}
           className="fixed bottom-6 right-6 bg-transparent hover:bg-primary/10 rounded-full p-4 shadow-lg z-40 transition-all"
           aria-label="Join waiting list"
         >
-          <ShoppingCart className="text-[#026D3A]" size={28} />
+          <img 
+            src="/lovable-uploads/102606c7-9c54-4763-9022-d1075dcad148.png" 
+            alt="Shopping Cart"
+            className="w-8 h-8"
+          />
         </button>
       )}
     </div>

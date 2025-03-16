@@ -1,7 +1,7 @@
 
 import { StepCard } from "../ui-components/StepCard";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ShoppingCart } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface HowItWorksSectionProps {
   openEmailCapture?: () => void;
@@ -57,7 +57,11 @@ export function HowItWorksSection({ openEmailCapture }: HowItWorksSectionProps) 
             </div>
             <div className="flex-shrink-0">
               <div className="w-28 h-28 rounded-full bg-primary/20 flex items-center justify-center animate-float">
-                <ShoppingCart className="text-primary" size={40} />
+                <img 
+                  src="/lovable-uploads/102606c7-9c54-4763-9022-d1075dcad148.png" 
+                  alt="Shopping Cart"
+                  className="w-12 h-12"
+                />
               </div>
             </div>
           </div>
