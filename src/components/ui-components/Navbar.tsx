@@ -38,7 +38,7 @@ export default function Navbar({ showLandingToggle }: NavbarProps) {
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/landing" className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-md bg-green-600 flex items-center justify-center">
               <img 
                 src="/lovable-uploads/5479986f-bcff-40af-bef0-8072e0ff9c02.png" 

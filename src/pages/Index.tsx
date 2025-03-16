@@ -5,20 +5,11 @@ import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { FooterSection } from "@/components/sections/FooterSection";
+import { Navigate } from "react-router-dom";
 
 const Index = () => {
-  return (
-    <div className="relative min-h-screen">
-      <NavbarWrapper showLandingToggle={true} />
-      <main>
-        <HeroSection isLandingPage={false} />
-        <FeaturesSection />
-        <HowItWorksSection />
-        <FAQSection />
-      </main>
-      <FooterSection />
-    </div>
-  );
+  // Redirect to landing page
+  return <Navigate to="/landing" replace />;
 };
 
 export default Index;
