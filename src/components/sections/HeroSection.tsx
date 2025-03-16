@@ -1,9 +1,47 @@
 
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { ShoppingListDemo } from "../ui-components/ShoppingListDemo";
 import { StoreComparisonDemo } from "../ui-components/StoreComparisonDemo";
+import { useState } from "react";
+import { toast } from "@/components/ui/use-toast";
+import { Mail } from "lucide-react";
 
-export function HeroSection() {
+interface HeroSectionProps {
+  isLandingPage?: boolean;
+}
+
+export function HeroSection({ isLandingPage }: HeroSectionProps) {
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email.trim() || !email.includes('@')) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    setIsSubmitting(true);
+    
+    // Simulate API call
+    setTimeout(() => {
+      toast({
+        title: "Success!",
+        description: "Thank you for joining our waiting list!",
+      });
+      setIsSubmitting(false);
+      setEmail("");
+    }, 1000);
+    
+    console.log("Email captured:", email);
+  };
+
   return (
     <section className="relative pt-32 pb-20 overflow-hidden">
       {/* Background elements */}
@@ -31,44 +69,70 @@ export function HeroSection() {
               </p>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ '--index': 3 } as React.CSSProperties}>
-              <Button size="lg" className="rounded-lg">
-                Build My First List
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="16" 
-                  height="16" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  className="ml-2"
-                >
-                  <path d="M5 12h14"></path>
-                  <path d="m12 5 7 7-7 7"></path>
-                </svg>
-              </Button>
-              <Button size="lg" variant="outline" className="rounded-lg">
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="16" 
-                  height="16" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  className="mr-2"
-                >
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <polygon points="10 8 16 12 10 16 10 8"></polygon>
-                </svg>
-                See How It Works
-              </Button>
-            </div>
+            {!isLandingPage ? (
+              <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ '--index': 3 } as React.CSSProperties}>
+                <Button size="lg" className="rounded-lg">
+                  Build My First List
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    width="16" 
+                    height="16" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    className="ml-2"
+                  >
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </Button>
+                <Button size="lg" variant="outline" className="rounded-lg">
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    width="16" 
+                    height="16" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    className="mr-2"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                  </svg>
+                  See How It Works
+                </Button>
+              </div>
+            ) : (
+              <div className="animate-fade-in" style={{ '--index': 3 } as React.CSSProperties}>
+                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                  <div className="relative flex-grow">
+                    <Input
+                      type="email"
+                      placeholder="Your email address"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="h-12 pl-10 pr-4"
+                      required
+                    />
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  </div>
+                  <Button 
+                    type="submit" 
+                    size="lg" 
+                    className="h-12 px-6 whitespace-nowrap" 
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Joining..." : "Join the Waiting List"}
+                  </Button>
+                </form>
+              </div>
+            )}
             
             <div className="pt-4 animate-fade-in" style={{ '--index': 4 } as React.CSSProperties}>
               <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">

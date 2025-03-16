@@ -15,7 +15,7 @@ const NavbarWrapper = ({ showLandingToggle }: NavbarWrapperProps) => {
   
   return (
     <div className="relative">
-      <Navbar />
+      <Navbar showLandingToggle={showLandingToggle} />
       
       {showLandingToggle && (
         <div className="absolute top-4 right-4">

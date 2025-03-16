@@ -1,6 +1,5 @@
 
 import React, { useState } from "react";
-import Navbar from "@/components/ui-components/Navbar";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
@@ -8,13 +7,14 @@ import { FAQSection } from "@/components/sections/FAQSection";
 import { FooterSection } from "@/components/sections/FooterSection";
 import { EmailCaptureForm } from "@/components/ui-components/EmailCaptureForm";
 import { toast } from "@/components/ui/use-toast";
+import NavbarWrapper from "@/components/ui-components/NavbarWrapper";
 
 const Landing = () => {
   const [showEmailCapture, setShowEmailCapture] = useState(true);
 
   return (
     <div className="relative min-h-screen">
-      <Navbar showLandingToggle={true} />
+      <NavbarWrapper showLandingToggle={true} />
       
       {showEmailCapture && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
@@ -23,12 +23,12 @@ const Landing = () => {
       )}
       
       <main>
-        <HeroSection />
+        <HeroSection isLandingPage={true} />
         <FeaturesSection />
         <HowItWorksSection />
         <FAQSection />
       </main>
-      <FooterSection />
+      <FooterSection hideSections={true} />
       
       {/* Floating Email Capture Button */}
       {!showEmailCapture && (

@@ -1,26 +1,21 @@
 
-export function FooterSection() {
+interface FooterSectionProps {
+  hideSections?: boolean;
+}
+
+export function FooterSection({ hideSections }: FooterSectionProps) {
   return (
     <footer className="bg-secondary/80 py-12">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-md bg-primary flex items-center justify-center">
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  className="w-5 h-5 text-white"
-                >
-                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
-                  <path d="M3 6h18" />
-                  <path d="M16 10a4 4 0 0 1-8 0" />
-                </svg>
+              <div className="h-8 w-8 rounded-md bg-green-600 flex items-center justify-center">
+                <img 
+                  src="/lovable-uploads/5479986f-bcff-40af-bef0-8072e0ff9c02.png" 
+                  alt="Smrt Mkt Logo" 
+                  className="w-6 h-6" 
+                />
               </div>
               <span className="text-xl font-medium">Smrt Mkt</span>
             </div>
@@ -39,24 +34,28 @@ export function FooterSection() {
             </ul>
           </div>
           
-          <div>
-            <h4 className="font-medium mb-4">Company</h4>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors">About Us</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors">Careers</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors">Blog</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors">Press</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="font-medium mb-4">Legal</h4>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors">Cookie Policy</a></li>
-            </ul>
-          </div>
+          {!hideSections && (
+            <>
+              <div>
+                <h4 className="font-medium mb-4">Company</h4>
+                <ul className="space-y-2">
+                  <li><a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors">About Us</a></li>
+                  <li><a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors">Careers</a></li>
+                  <li><a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors">Blog</a></li>
+                  <li><a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors">Press</a></li>
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="font-medium mb-4">Legal</h4>
+                <ul className="space-y-2">
+                  <li><a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors">Terms of Service</a></li>
+                  <li><a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors">Privacy Policy</a></li>
+                  <li><a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors">Cookie Policy</a></li>
+                </ul>
+              </div>
+            </>
+          )}
         </div>
         
         <div className="border-t border-border mt-12 pt-6 flex flex-col md:flex-row justify-between items-center">

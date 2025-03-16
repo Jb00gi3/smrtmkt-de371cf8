@@ -11,7 +11,7 @@ const Index = () => {
     <div className="relative min-h-screen">
       <NavbarWrapper showLandingToggle={true} />
       <main>
-        <HeroSection />
+        <HeroSection isLandingPage={false} />
         <FeaturesSection />
         <HowItWorksSection />
         <FAQSection />

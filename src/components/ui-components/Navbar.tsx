@@ -10,9 +10,14 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 
-export default function Navbar() {
+interface NavbarProps {
+  showLandingToggle?: boolean;
+}
+
+export default function Navbar({ showLandingToggle }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const isLandingPage = location.pathname === '/landing';
   
   useEffect(() => {
     const handleScroll = () => {
@@ -34,21 +39,12 @@ export default function Navbar() {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-md bg-primary flex items-center justify-center">
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                className="w-5 h-5 text-white"
-              >
-                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
-                <path d="M3 6h18" />
-                <path d="M16 10a4 4 0 0 1-8 0" />
-              </svg>
+            <div className="h-8 w-8 rounded-md bg-green-600 flex items-center justify-center">
+              <img 
+                src="/lovable-uploads/5479986f-bcff-40af-bef0-8072e0ff9c02.png" 
+                alt="Smrt Mkt Logo" 
+                className="w-6 h-6" 
+              />
             </div>
             <span className="text-xl font-medium">Smrt Mkt</span>
           </Link>
@@ -63,51 +59,58 @@ export default function Navbar() {
             <a href="#faq" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
               FAQ
             </a>
-            {location.pathname !== "/" && (
+            {!isLandingPage && location.pathname !== "/" && (
               <Link to="/shopping-list" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
                 My List
               </Link>
             )}
             
-            {/* Admin Testing Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="gap-2 border-dashed border-yellow-500 text-yellow-600 hover:bg-yellow-50"
-                >
-                  <Settings className="h-4 w-4" />
-                  Admin Testing
-                  <ChevronDown className="h-3 w-3 opacity-50" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48 bg-white">
-                <DropdownMenuItem asChild>
-                  <Link to="/login" className="cursor-pointer">Login</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/signup" className="cursor-pointer">Signup</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/shopping-list" className="cursor-pointer">Shopping List</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/price-comparison" className="cursor-pointer">Price Comparison</Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            {/* Admin Testing Dropdown - Hidden on Landing Page */}
+            {!isLandingPage && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="gap-2 border-dashed border-yellow-500 text-yellow-600 hover:bg-yellow-50"
+                  >
+                    <Settings className="h-4 w-4" />
+                    Admin Testing
+                    <ChevronDown className="h-3 w-3 opacity-50" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48 bg-white">
+                  <DropdownMenuItem asChild>
+                    <Link to="/login" className="cursor-pointer">Login</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/signup" className="cursor-pointer">Signup</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/shopping-list" className="cursor-pointer">Shopping List</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/price-comparison" className="cursor-pointer">Price Comparison</Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
           </nav>
           
           <div className="flex items-center gap-4">
-            <Link to="/login">
-              <Button variant="outline" size="sm" className="hidden md:inline-flex">
-                Sign In
-              </Button>
-            </Link>
-            <Link to="/signup">
-              <Button size="sm">Get Started</Button>
-            </Link>
+            {/* Hide Sign In and Get Started buttons on Landing Page */}
+            {!isLandingPage && (
+              <>
+                <Link to="/login">
+                  <Button variant="outline" size="sm" className="hidden md:inline-flex">
+                    Sign In
+                  </Button>
+                </Link>
+                <Link to="/signup">
+                  <Button size="sm">Get Started</Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>
