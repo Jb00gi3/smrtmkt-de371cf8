@@ -7,6 +7,7 @@ import { FAQSection } from "@/components/sections/FAQSection";
 import { FooterSection } from "@/components/sections/FooterSection";
 import { EmailCaptureForm } from "@/components/ui-components/EmailCaptureForm";
 import { EmailAdmin } from "@/components/ui-components/EmailAdmin";
+import { BottomEmailCapture } from "@/components/ui-components/BottomEmailCapture";
 import { toast } from "@/components/ui/use-toast";
 import NavbarWrapper from "@/components/ui-components/NavbarWrapper";
 
@@ -56,8 +57,13 @@ const Landing = () => {
         <main className="space-y-12">
           <HeroSection isLandingPage={true} />
           {/* FeaturesSection hidden per request */}
-          <HowItWorksSection openEmailCapture={() => setShowEmailCapture(true)} />
-          <FAQSection />
+          <div id="how-it-works">
+            <HowItWorksSection openEmailCapture={() => setShowEmailCapture(true)} />
+          </div>
+          <div id="faq">
+            <FAQSection />
+          </div>
+          <BottomEmailCapture />
         </main>
       )}
       

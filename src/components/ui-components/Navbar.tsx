@@ -28,6 +28,13 @@ export default function Navbar({ showLandingToggle }: NavbarProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -50,15 +57,18 @@ export default function Navbar({ showLandingToggle }: NavbarProps) {
           </Link>
           
           <nav className="hidden md:flex items-center gap-8">
-            <a href="#how-it-works" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+            <button 
+              onClick={() => scrollToSection('how-it-works')} 
+              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+            >
               How It Works
-            </a>
-            <a href="#features" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
-              Features
-            </a>
-            <a href="#faq" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+            </button>
+            <button 
+              onClick={() => scrollToSection('faq')} 
+              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+            >
               FAQ
-            </a>
+            </button>
             {!isLandingPage && location.pathname !== "/" && (
               <Link to="/shopping-list" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
                 My List
