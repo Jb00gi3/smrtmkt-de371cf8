@@ -1,0 +1,66 @@
+
+<!-- Login Page Content -->
+<div class="container mx-auto px-4 py-20 md:py-24 flex items-center justify-center">
+  <div class="w-full max-w-md p-8 space-y-8 bg-white rounded-xl shadow-elevated border border-border">
+    <div class="text-center">
+      <h1 class="text-2xl font-bold">Welcome back</h1>
+      <p class="text-sm text-muted-foreground mt-2">
+        Sign in to access your saved shopping lists
+      </p>
+    </div>
+    
+    <form method="post" class="space-y-6">
+      {% csrf_token %}
+      <div class="space-y-2">
+        <label for="email" class="text-sm font-medium">
+          Email
+        </label>
+        <input 
+          id="email" 
+          name="email" 
+          type="email" 
+          placeholder="your@email.com" 
+          class="form-input w-full" 
+          required
+        />
+      </div>
+      
+      <div class="space-y-2">
+        <div class="flex items-center justify-between">
+          <label for="password" class="text-sm font-medium">
+            Password
+          </label>
+          <a href="{% url 'password_reset' %}" class="text-xs text-primary hover:underline">
+            Forgot password?
+          </a>
+        </div>
+        <input 
+          id="password" 
+          name="password" 
+          type="password" 
+          class="form-input w-full" 
+          required
+        />
+      </div>
+      
+      <button class="btn btn-primary w-full" type="submit">
+        Sign In
+      </button>
+
+      {% if form.errors %}
+      <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+        <p class="text-red-700 text-sm">Invalid email or password. Please try again.</p>
+      </div>
+      {% endif %}
+    </form>
+    
+    <div class="text-center text-sm">
+      <p>
+        Don't have an account?{" "}
+        <a href="{% url 'signup' %}" class="text-primary hover:underline">
+          Sign up
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
