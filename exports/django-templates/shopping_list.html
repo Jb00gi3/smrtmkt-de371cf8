@@ -1,0 +1,366 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping List - ShopSmart</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.ico' %}">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <a href="{% url 'landing' %}" class="logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-basket-shopping"></i>
+        </div>
+        <span class="logo-text">ShopSmart</span>
+      </a>
+
+      <div class="navbar-nav">
+        <a href="{% url 'landing' %}#how-it-works" class="nav-link">How It Works</a>
+        <a href="{% url 'landing' %}#faq" class="nav-link">FAQ</a>
+        <a href="{% url 'shopping_list' %}" class="nav-link active">My List</a>
+      </div>
+
+      <div class="navbar-actions">
+        {% if user.is_authenticated %}
+          <div class="dropdown">
+            <button class="btn btn-ghost">
+              <i class="fa-regular fa-user mr-2"></i>
+              <span>{{ user.first_name|default:user.username }}</span>
+              <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="{% url 'profile' %}" class="dropdown-item">
+                <i class="fa-regular fa-user mr-2"></i> Profile
+              </a>
+              <a href="{% url 'settings' %}" class="dropdown-item">
+                <i class="fa-solid fa-cog mr-2"></i> Settings
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="{% url 'logout' %}" class="dropdown-item text-red-600">
+                <i class="fa-solid fa-sign-out-alt mr-2"></i> Sign Out
+              </a>
+            </div>
+          </div>
+        {% else %}
+          <a href="{% url 'login' %}" class="btn btn-outline">Sign In</a>
+          <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mx-auto px-4 py-20 md:py-24">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-3xl font-bold mb-8 text-center">My Shopping List</h1>
+      <p class="text-center text-muted-foreground mb-8">
+        Add items to your shopping list and we'll find the best prices for you.
+      </p>
+      
+      <div class="shopping-list">
+        <div class="shopping-list-header">
+          <h3>My Shopping List</h3>
+          <div class="shopping-list-actions">
+            <button class="btn btn-sm btn-outline">Save List</button>
+            <a href="{% url 'price_comparison' %}" class="btn btn-sm btn-primary">See My Savings</a>
+          </div>
+        </div>
+        
+        <div class="shopping-list-categories">
+          {% if categories %}
+            <div class="category-header">
+              <i class="fa-solid fa-list-ul category-icon"></i>
+              <span>Categories</span>
+            </div>
+            
+            {% for category in categories %}
+            <div class="category">
+              <div class="category-name">{{ category.name }}</div>
+              <ul class="item-list">
+                {% for item in category.items %}
+                <li class="item">{{ item.name }}{% if item.note %} ({{ item.note }}){% endif %}</li>
+                {% endfor %}
+                <li class="item add-item">
+                  <button class="btn btn-ghost btn-add" data-category-id="{{ category.id }}">
+                    <i class="fa-solid fa-plus add-icon"></i>
+                    Add Item...
+                  </button>
+                </li>
+              </ul>
+            </div>
+            {% endfor %}
+            
+          {% else %}
+            <div class="p-8 text-center">
+              <p class="text-muted-foreground mb-4">Your shopping list is empty</p>
+              <button id="add-first-item" class="btn btn-primary">
+                <i class="fa-solid fa-plus mr-2"></i> Add Your First Item
+              </button>
+            </div>
+          {% endif %}
+        </div>
+        
+        <div class="p-4 border-t border-border">
+          <button id="add-category" class="btn btn-ghost btn-add w-full">
+            <i class="fa-solid fa-plus mr-2"></i> Add New Category
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Item Modal -->
+  <div id="add-item-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl shadow-lg p-6 max-w-md w-full mx-4">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold">Add New Item</h3>
+        <button id="item-modal-close" class="text-gray-500 hover:text-gray-800">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+      
+      <form id="add-item-form" method="post" action="{% url 'add_item' %}">
+        {% csrf_token %}
+        <input type="hidden" id="category-id-input" name="category_id" value="">
+        
+        <div class="space-y-4">
+          <div class="space-y-2">
+            <label for="item-name" class="block text-sm font-medium">
+              Item Name
+            </label>
+            <input
+              type="text"
+              id="item-name"
+              name="name"
+              placeholder="e.g., Milk"
+              class="form-input w-full"
+              required
+            />
+          </div>
+
+          <div class="space-y-2">
+            <label for="item-note" class="block text-sm font-medium">
+              Note (optional)
+            </label>
+            <input
+              type="text"
+              id="item-note"
+              name="note"
+              placeholder="e.g., 1 gallon, organic"
+              class="form-input w-full"
+            />
+          </div>
+          
+          <div class="flex justify-end gap-2 mt-6">
+            <button type="button" id="item-modal-cancel" class="btn btn-outline">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Add Item
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Category Modal -->
+  <div id="add-category-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl shadow-lg p-6 max-w-md w-full mx-4">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold">Add New Category</h3>
+        <button id="category-modal-close" class="text-gray-500 hover:text-gray-800">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+      
+      <form id="add-category-form" method="post" action="{% url 'add_category' %}">
+        {% csrf_token %}
+        <div class="space-y-4">
+          <div class="space-y-2">
+            <label for="category-name" class="block text-sm font-medium">
+              Category Name
+            </label>
+            <input
+              type="text"
+              id="category-name"
+              name="name"
+              placeholder="e.g., Dairy, Produce, Meat"
+              class="form-input w-full"
+              required
+            />
+          </div>
+          
+          <div class="flex justify-end gap-2 mt-6">
+            <button type="button" id="category-modal-cancel" class="btn btn-outline">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Add Category
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="logo-icon">
+              <i class="fa-solid fa-basket-shopping"></i>
+            </div>
+            <span class="logo-text">ShopSmart</span>
+          </div>
+          <p class="footer-tagline">Save money on your grocery shopping</p>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-menu-container">
+            <h4 class="footer-title">Legal</h4>
+            <ul class="footer-menu">
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">&copy; {% now "Y" %} ShopSmart. All rights reserved.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fa-brands fa-twitter"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast container -->
+  <div id="toast-container" class="fixed top-4 right-4 z-50"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Toast function
+      function showToast(title, message, type = 'success') {
+        const toastContainer = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = `rounded-lg p-4 mb-4 min-w-[18rem] shadow-lg ${type === 'success' ? 'bg-green-50 border-l-4 border-green-500' : 'bg-red-50 border-l-4 border-red-500'}`;
+        
+        toast.innerHTML = `
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-medium ${type === 'success' ? 'text-green-800' : 'text-red-800'}">${title}</h3>
+              <p class="text-sm ${type === 'success' ? 'text-green-700' : 'text-red-700'}">${message}</p>
+            </div>
+            <button class="text-gray-400 hover:text-gray-500">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        `;
+        
+        toastContainer.appendChild(toast);
+        
+        // Close button functionality
+        const closeButton = toast.querySelector('button');
+        closeButton.addEventListener('click', function() {
+          toast.remove();
+        });
+        
+        // Auto-remove after 5 seconds
+        setTimeout(() => {
+          toast.remove();
+        }, 5000);
+      }
+
+      // Add item modal
+      const addItemModal = document.getElementById('add-item-modal');
+      const itemModalClose = document.getElementById('item-modal-close');
+      const itemModalCancel = document.getElementById('item-modal-cancel');
+      const categoryIdInput = document.getElementById('category-id-input');
+      
+      // Add category modal
+      const addCategoryModal = document.getElementById('add-category-modal');
+      const categoryModalClose = document.getElementById('category-modal-close');
+      const categoryModalCancel = document.getElementById('category-modal-cancel');
+      
+      // Add item buttons
+      const addItemButtons = document.querySelectorAll('.btn-add[data-category-id]');
+      addItemButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const categoryId = this.getAttribute('data-category-id');
+          categoryIdInput.value = categoryId;
+          addItemModal.classList.remove('hidden');
+        });
+      });
+      
+      // Add first item button
+      const addFirstItemButton = document.getElementById('add-first-item');
+      if (addFirstItemButton) {
+        addFirstItemButton.addEventListener('click', function() {
+          addCategoryModal.classList.remove('hidden');
+        });
+      }
+      
+      // Add category button
+      const addCategoryButton = document.getElementById('add-category');
+      addCategoryButton.addEventListener('click', function() {
+        addCategoryModal.classList.remove('hidden');
+      });
+      
+      // Close item modal
+      itemModalClose.addEventListener('click', function() {
+        addItemModal.classList.add('hidden');
+      });
+      itemModalCancel.addEventListener('click', function() {
+        addItemModal.classList.add('hidden');
+      });
+      
+      // Close category modal
+      categoryModalClose.addEventListener('click', function() {
+        addCategoryModal.classList.add('hidden');
+      });
+      categoryModalCancel.addEventListener('click', function() {
+        addCategoryModal.classList.add('hidden');
+      });
+      
+      // Close on outside click
+      addItemModal.addEventListener('click', function(e) {
+        if (e.target === addItemModal) {
+          addItemModal.classList.add('hidden');
+        }
+      });
+      addCategoryModal.addEventListener('click', function(e) {
+        if (e.target === addCategoryModal) {
+          addCategoryModal.classList.add('hidden');
+        }
+      });
+      
+      // For Django integration, forms will submit to the server
+      // The JavaScript here just handles UI interactions
+      // You would add your Django form handling code to process these forms
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - ShopSmart</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.ico' %}">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <a href="{% url 'landing' %}" class="logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-basket-shopping"></i>
+        </div>
+        <span class="logo-text">ShopSmart</span>
+      </a>
+
+      <div class="navbar-nav">
+        <a href="{% url 'landing' %}#how-it-works" class="nav-link">How It Works</a>
+        <a href="{% url 'landing' %}#faq" class="nav-link">FAQ</a>
+      </div>
+
+      <div class="navbar-actions">
+        <a href="{% url 'login' %}" class="btn btn-outline">Sign In</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Signup Page Content -->
+  <div class="container mx-auto px-4 py-20 md:py-24 flex items-center justify-center">
+    <div class="w-full max-w-md p-8 space-y-8 bg-white rounded-xl shadow-elevated border border-border">
+      <div class="text-center">
+        <h1 class="text-2xl font-bold">Create an account</h1>
+        <p class="text-sm text-muted-foreground mt-2">
+          Start saving money on your grocery shopping
+        </p>
+      </div>
+      
+      <form method="post" class="space-y-6">
+        {% csrf_token %}
+        <div class="space-y-2">
+          <label for="name" class="text-sm font-medium">
+            Full Name
+          </label>
+          <input 
+            id="name" 
+            name="name" 
+            type="text" 
+            placeholder="John Doe" 
+            class="form-input w-full" 
+            required
+          />
+        </div>
+        
+        <div class="space-y-2">
+          <label for="email" class="text-sm font-medium">
+            Email
+          </label>
+          <input 
+            id="email" 
+            name="email" 
+            type="email" 
+            placeholder="your@email.com" 
+            class="form-input w-full" 
+            required
+          />
+        </div>
+        
+        <div class="space-y-2">
+          <label for="password" class="text-sm font-medium">
+            Password
+          </label>
+          <input 
+            id="password" 
+            name="password" 
+            type="password" 
+            class="form-input w-full" 
+            required
+          />
+        </div>
+        
+        <div class="space-y-2">
+          <label for="zipCode" class="text-sm font-medium">
+            Zip Code
+          </label>
+          <input 
+            id="zipCode" 
+            name="zipCode" 
+            type="text" 
+            placeholder="12345" 
+            class="form-input w-full" 
+            maxlength="5" 
+            required
+          />
+          <p class="text-xs text-muted-foreground">
+            We'll use this to find stores near you
+          </p>
+        </div>
+        
+        <div class="space-y-2">
+          <label for="householdType" class="text-sm font-medium">
+            Household Type
+          </label>
+          <select id="householdType" name="householdType" class="form-input w-full" required>
+            <option value="" disabled selected>Select household type</option>
+            <option value="single">Single</option>
+            <option value="couple">Couple</option>
+            <option value="family-small">Small Family (1-2 children)</option>
+            <option value="family-large">Large Family (3+ children)</option>
+            <option value="roommates">Roommates</option>
+          </select>
+        </div>
+        
+        <button class="btn btn-primary w-full" type="submit">
+          Create Account
+        </button>
+
+        {% if form.errors %}
+        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+          <ul class="text-red-700 text-sm">
+            {% for field, errors in form.errors.items %}
+              {% for error in errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      </form>
+      
+      <div class="text-center text-sm">
+        <p>
+          Already have an account?{" "}
+          <a href="{% url 'login' %}" class="text-primary hover:underline">
+            Sign in
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="logo-icon">
+              <i class="fa-solid fa-basket-shopping"></i>
+            </div>
+            <span class="logo-text">ShopSmart</span>
+          </div>
+          <p class="footer-tagline">Save money on your grocery shopping</p>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-menu-container">
+            <h4 class="footer-title">Legal</h4>
+            <ul class="footer-menu">
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">&copy; {% now "Y" %} ShopSmart. All rights reserved.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fa-brands fa-twitter"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

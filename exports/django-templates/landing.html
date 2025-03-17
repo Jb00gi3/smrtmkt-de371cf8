@@ -1,0 +1,927 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopSmart - Save Money on Your Grocery Shopping</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.ico' %}">
+  <!-- Include Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <div class="logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-basket-shopping"></i>
+        </div>
+        <span class="logo-text">ShopSmart</span>
+      </div>
+
+      <div class="navbar-nav">
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </div>
+
+      <div class="navbar-actions">
+        <a href="{% url 'login' %}" class="btn btn-outline">Sign In</a>
+        <a href="{% url 'signup' %}" class="btn btn-primary">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <span class="hero-badge">Best Price Finder</span>
+          <h1 class="hero-title">Save Money on Your Grocery Shopping</h1>
+          <p class="hero-description">
+            Find the best deals across multiple stores for your shopping list. Stop overpaying for groceries and save time with our smart comparison tool.
+          </p>
+          <div class="hero-buttons">
+            <form id="hero-email-form" class="flex w-full max-w-sm flex-col gap-2 sm:flex-row">
+              <div class="relative flex-grow">
+                <input 
+                  type="email" 
+                  id="hero-email-input"
+                  placeholder="Your email address" 
+                  class="form-input pl-10"
+                  required
+                >
+                <i class="fa-regular fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground"></i>
+              </div>
+              <button 
+                type="submit" 
+                class="btn btn-primary"
+                id="hero-submit-btn"
+              >
+                <span id="hero-btn-text">Join the Waiting List</span>
+                <span id="hero-btn-loading" class="hidden">
+                  <i class="fa-solid fa-spinner fa-spin mr-2"></i>Joining...
+                </span>
+              </button>
+            </form>
+            <p class="hero-security">
+              <i class="fa-solid fa-lock security-icon"></i>
+              We respect your privacy and will never share your information
+            </p>
+          </div>
+        </div>
+
+        <div class="demo-windows">
+          <!-- First Demo Window: Shopping List -->
+          <div class="demo-window">
+            <div class="shopping-list">
+              <div class="shopping-list-header">
+                <h3>My Shopping List</h3>
+                <div class="shopping-list-actions">
+                  <button class="btn btn-sm btn-outline">Save List</button>
+                </div>
+              </div>
+              
+              <div class="shopping-list-categories">
+                <div class="category-header">
+                  <i class="fa-solid fa-list-ul category-icon"></i>
+                  <span>Categories</span>
+                </div>
+                
+                <div class="category">
+                  <div class="category-name">Dairy</div>
+                  <ul class="item-list">
+                    <li class="item">Milk (1 gallon)</li>
+                    <li class="item">Yogurt</li>
+                    <li class="item">Cheddar Cheese</li>
+                  </ul>
+                </div>
+                
+                <div class="category">
+                  <div class="category-name">Produce</div>
+                  <ul class="item-list">
+                    <li class="item">Bananas</li>
+                    <li class="item">Spinach</li>
+                    <li class="item">Tomatoes</li>
+                  </ul>
+                </div>
+                
+                <div class="category">
+                  <div class="category-name">Bakery</div>
+                  <ul class="item-list">
+                    <li class="item">Whole Wheat Bread</li>
+                    <li class="item">Bagels</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Second Demo Window: Store Comparison -->
+          <div class="demo-window">
+            <div class="store-comparison">
+              <div class="store-comparison-header">
+                <h3>Price Comparison</h3>
+                <p>Save $14.37 by shopping at multiple stores</p>
+              </div>
+              
+              <div class="stores-list">
+                <div class="store">
+                  <div class="store-info">
+                    <div class="store-logo">
+                      <span>W</span>
+                    </div>
+                    <div class="store-details">
+                      <h4>Walmart</h4>
+                      <span class="store-items">8 items</span>
+                    </div>
+                  </div>
+                  <div class="store-price">$42.87</div>
+                </div>
+                
+                <div class="store best-store">
+                  <div class="store-info">
+                    <div class="store-logo">
+                      <span>A</span>
+                    </div>
+                    <div class="store-details">
+                      <h4>Aldi</h4>
+                      <span class="store-items">6 items</span>
+                    </div>
+                  </div>
+                  <div class="store-price">$28.50</div>
+                </div>
+                
+                <div class="store">
+                  <div class="store-info">
+                    <div class="store-logo">
+                      <span>K</span>
+                    </div>
+                    <div class="store-details">
+                      <h4>Kroger</h4>
+                      <span class="store-items">3 items</span>
+                    </div>
+                  </div>
+                  <div class="store-price">$36.19</div>
+                </div>
+              </div>
+              
+              <div class="comparison-actions">
+                <button class="btn btn-outline">See Details</button>
+                <button class="btn btn-primary">Optimize Shopping</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="py-12">
+    <div class="container">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <h2 class="text-3xl font-semibold mb-4">How It Works</h2>
+        <p class="text-lg text-muted-foreground">
+          Finding the best deals across stores has never been easier. Follow these simple steps to start saving.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+        <div class="flex flex-col items-center text-center p-6 rounded-xl bg-secondary border border-border">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center bg-primary text-white font-bold text-lg mb-4">1</div>
+          <h3 class="text-xl font-semibold mb-3">Create Your Shopping List</h3>
+          <p class="text-muted-foreground">Add standard products to your list – like milk, bread, or apples – without worrying about specific brands or sizes yet.</p>
+        </div>
+        
+        <div class="flex flex-col items-center text-center p-6 rounded-xl bg-secondary border border-border">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center bg-primary text-white font-bold text-lg mb-4">2</div>
+          <h3 class="text-xl font-semibold mb-3">Set Your Preferences</h3>
+          <p class="text-muted-foreground">Tell us your preferences for organic items, favorite brands, package sizes, and quality levels for personalized results.</p>
+        </div>
+        
+        <div class="flex flex-col items-center text-center p-6 rounded-xl bg-secondary border border-border">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center bg-primary text-white font-bold text-lg mb-4">3</div>
+          <h3 class="text-xl font-semibold mb-3">Get Optimized Results</h3>
+          <p class="text-muted-foreground">Receive a consolidated shopping plan that shows exactly which stores to visit for the best deals on your entire list.</p>
+        </div>
+      </div>
+      
+      <div class="mt-12 rounded-xl bg-gradient-to-r from-primary/10 to-blue-600/10 p-6 md:p-8">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="max-w-xl">
+            <h3 class="text-2xl font-medium mb-3">Ready to start saving on your shopping?</h3>
+            <p class="text-muted-foreground mb-3">
+              Join thousands of smart shoppers who are saving time and money every week with our price comparison tool.
+            </p>
+            <div class="flex flex-wrap gap-4 mt-3">
+              <button 
+                class="btn btn-primary email-capture-open"
+              >
+                Join the Waiting List
+                <i class="fa-solid fa-arrow-right ml-2 h-4 w-4"></i>
+              </button>
+            </div>
+          </div>
+          <div class="flex-shrink-0">
+            <div class="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center">
+              <img 
+                src="{% static 'images/shopping-cart.png' %}" 
+                alt="Shopping Cart"
+                class="w-10 h-10"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-20 bg-white">
+    <div class="container">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl font-semibold mb-4">Frequently Asked Questions</h2>
+        <p class="text-lg text-muted-foreground">
+          Got questions about our price comparison tool? Find answers to common questions below.
+        </p>
+      </div>
+      
+      <div class="max-w-3xl mx-auto">
+        <div class="border-b border-border last:border-0 faq-item">
+          <button
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-all faq-question"
+          >
+            <span class="text-lg">How does the price comparison work?</span>
+            <i class="fa-solid fa-chevron-down h-5 w-5 transition-transform"></i>
+          </button>
+          <div class="overflow-hidden transition-all duration-300 max-h-0 opacity-0 faq-answer">
+            <p class="text-muted-foreground pb-4">Our system monitors prices across numerous retailers in real-time. When you create a shopping list, our algorithm automatically finds the best matches for your items based on your preferences, then compares prices to create an optimized shopping plan.</p>
+          </div>
+        </div>
+        
+        <div class="border-b border-border last:border-0 faq-item">
+          <button
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-all faq-question"
+          >
+            <span class="text-lg">Which stores do you compare?</span>
+            <i class="fa-solid fa-chevron-down h-5 w-5 transition-transform"></i>
+          </button>
+          <div class="overflow-hidden transition-all duration-300 max-h-0 opacity-0 faq-answer">
+            <p class="text-muted-foreground pb-4">We compare prices across major grocery chains, big-box retailers, wholesale clubs, and specialty stores. The specific stores depend on your location, but typically include 20+ retailers in each market area.</p>
+          </div>
+        </div>
+        
+        <div class="border-b border-border last:border-0 faq-item">
+          <button
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-all faq-question"
+          >
+            <span class="text-lg">Is there a fee to use the service?</span>
+            <i class="fa-solid fa-chevron-down h-5 w-5 transition-transform"></i>
+          </button>
+          <div class="overflow-hidden transition-all duration-300 max-h-0 opacity-0 faq-answer">
+            <p class="text-muted-foreground pb-4">We offer a free basic plan that lets you create shopping lists and see basic price comparisons. Our premium plan offers advanced features like preference setting, historical price tracking, and sale predictions for a small monthly fee.</p>
+          </div>
+        </div>
+        
+        <div class="border-b border-border last:border-0 faq-item">
+          <button
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-all faq-question"
+          >
+            <span class="text-lg">How accurate are the prices?</span>
+            <i class="fa-solid fa-chevron-down h-5 w-5 transition-transform"></i>
+          </button>
+          <div class="overflow-hidden transition-all duration-300 max-h-0 opacity-0 faq-answer">
+            <p class="text-muted-foreground pb-4">We update prices multiple times daily to ensure accuracy. However, in-store prices can occasionally differ from online prices, and some sales may be store-specific. We clearly mark when a price was last verified.</p>
+          </div>
+        </div>
+        
+        <div class="border-b border-border last:border-0 faq-item">
+          <button
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-all faq-question"
+          >
+            <span class="text-lg">Can I add my loyalty cards or coupons?</span>
+            <i class="fa-solid fa-chevron-down h-5 w-5 transition-transform"></i>
+          </button>
+          <div class="overflow-hidden transition-all duration-300 max-h-0 opacity-0 faq-answer">
+            <p class="text-muted-foreground pb-4">Yes! You can link your store loyalty accounts to see personalized prices with your discounts applied. You can also add digital coupons directly through our platform for additional savings.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom Email Capture Section -->
+  <section class="py-16 bg-gradient-to-r from-primary/5 to-blue-500/5">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto text-center space-y-6">
+        <h2 class="text-3xl font-bold tracking-tight">Ready to start saving?</h2>
+        <p class="text-lg text-muted-foreground">
+          Join our waiting list today and be among the first to access our smart shopping platform.
+        </p>
+        
+        <form id="bottom-email-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mt-8">
+          <div class="relative flex-grow">
+            <input
+              type="email"
+              id="bottom-email-input"
+              placeholder="Your email address"
+              class="form-input h-12 pl-10 pr-4"
+              required
+            />
+            <i class="fa-regular fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground"></i>
+          </div>
+          <button 
+            type="submit" 
+            class="btn btn-primary h-12 px-6 whitespace-nowrap"
+            id="bottom-submit-btn"
+          >
+            <span id="bottom-btn-text">Join the Waiting List</span>
+            <span id="bottom-btn-loading" class="hidden">
+              <i class="fa-solid fa-spinner fa-spin mr-2"></i>Joining...
+            </span>
+          </button>
+        </form>
+        
+        <p class="text-sm text-muted-foreground mt-4">
+          We respect your privacy and will never share your information with third parties.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="logo-icon">
+              <i class="fa-solid fa-basket-shopping"></i>
+            </div>
+            <span class="logo-text">ShopSmart</span>
+          </div>
+          <p class="footer-tagline">Save money on your grocery shopping</p>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-menu-container">
+            <h4 class="footer-title">Legal</h4>
+            <ul class="footer-menu">
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">&copy; {% now "Y" %} ShopSmart. All rights reserved.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fa-brands fa-twitter"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Email Capture Modal -->
+  <div id="email-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl shadow-lg p-6 max-w-md w-full mx-4">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold">Join Our Waiting List</h3>
+        <button id="modal-close" class="text-gray-500 hover:text-gray-800">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+      
+      <p class="text-muted-foreground mb-6">
+        Be the first to know when we launch and get exclusive early access to our price comparison tool.
+      </p>
+      
+      <form id="modal-email-form">
+        <div class="space-y-4">
+          <div class="space-y-2">
+            <label for="modal-email-input" class="block text-sm font-medium">
+              Email Address
+            </label>
+            <div class="relative">
+              <input
+                type="email"
+                id="modal-email-input"
+                placeholder="your@email.com"
+                class="form-input pl-10 w-full"
+                required
+              />
+              <i class="fa-regular fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground"></i>
+            </div>
+          </div>
+          
+          <button 
+            type="submit"
+            class="btn btn-primary w-full"
+            id="modal-submit-btn"
+          >
+            <span id="modal-btn-text">Join the Waiting List</span>
+            <span id="modal-btn-loading" class="hidden">
+              <i class="fa-solid fa-spinner fa-spin mr-2"></i>Joining...
+            </span>
+          </button>
+          
+          <p class="text-xs text-center text-muted-foreground">
+            We respect your privacy and will never share your information.
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Panel (Hidden) -->
+  <div id="admin-panel" class="hidden">
+    <div class="container mx-auto px-4 pt-32 pb-20">
+      <div class="max-w-5xl mx-auto">
+        <h1 class="text-3xl font-bold mb-6">Email Admin Panel</h1>
+        
+        <div class="bg-white rounded-xl shadow-lg border border-border overflow-hidden">
+          <div class="p-4 flex justify-between items-center border-b border-border">
+            <h2 class="text-xl font-semibold">Captured Emails</h2>
+            <div class="space-x-2">
+              <button id="copy-emails" class="btn btn-sm btn-outline">
+                <i class="fa-regular fa-copy mr-1"></i> Copy All
+              </button>
+              <button id="download-emails" class="btn btn-sm btn-outline">
+                <i class="fa-solid fa-download mr-1"></i> Download CSV
+              </button>
+              <button id="clear-emails" class="btn btn-sm btn-destructive">
+                <i class="fa-solid fa-trash mr-1"></i> Clear All
+              </button>
+            </div>
+          </div>
+          
+          <div class="p-4">
+            <table class="w-full">
+              <thead>
+                <tr class="text-left border-b border-border">
+                  <th class="pb-2">Email</th>
+                  <th class="pb-2">Source</th>
+                  <th class="pb-2">Date</th>
+                </tr>
+              </thead>
+              <tbody id="email-list">
+                <!-- Emails will be populated here via JS -->
+                <tr class="email-empty-state">
+                  <td colspan="3" class="py-8 text-center text-muted-foreground">
+                    <i class="fa-regular fa-envelope-open text-2xl mb-2"></i>
+                    <p>No emails captured yet</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast container -->
+  <div id="toast-container" class="fixed top-4 right-4 z-50"></div>
+
+  <!-- Fixed Join Button -->
+  <button 
+    id="fixed-join-btn"
+    class="fixed bottom-6 right-6 bg-transparent hover:bg-primary/10 rounded-full p-4 shadow-lg z-40 transition-all"
+    aria-label="Join waiting list"
+  >
+    <img 
+      src="{% static 'images/shopping-cart.png' %}" 
+      alt="Shopping Cart"
+      class="w-8 h-8"
+    />
+  </button>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Toast function
+      function showToast(title, message, type = 'success') {
+        const toastContainer = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = `rounded-lg p-4 mb-4 min-w-[18rem] shadow-lg ${type === 'success' ? 'bg-green-50 border-l-4 border-green-500' : 'bg-red-50 border-l-4 border-red-500'}`;
+        
+        toast.innerHTML = `
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-medium ${type === 'success' ? 'text-green-800' : 'text-red-800'}">${title}</h3>
+              <p class="text-sm ${type === 'success' ? 'text-green-700' : 'text-red-700'}">${message}</p>
+            </div>
+            <button class="text-gray-400 hover:text-gray-500">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        `;
+        
+        toastContainer.appendChild(toast);
+        
+        // Close button functionality
+        const closeButton = toast.querySelector('button');
+        closeButton.addEventListener('click', function() {
+          toast.remove();
+        });
+        
+        // Auto-remove after 5 seconds
+        setTimeout(() => {
+          toast.remove();
+        }, 5000);
+      }
+      
+      // Email validation
+      function isValidEmail(email) {
+        return email.trim() !== '' && email.includes('@');
+      }
+      
+      // Store email in localStorage
+      function storeEmail(email, source) {
+        try {
+          // Get current stored emails or initialize empty array
+          const storedEmails = JSON.parse(localStorage.getItem('capturedEmails') || '[]');
+          
+          // Add new email with timestamp
+          storedEmails.push({
+            email: email.trim(),
+            source: source,
+            timestamp: new Date().toISOString()
+          });
+          
+          // Save back to localStorage
+          localStorage.setItem('capturedEmails', JSON.stringify(storedEmails));
+          
+          console.log("Email captured and stored:", email);
+          console.log("All stored emails:", storedEmails);
+          
+          return true;
+        } catch (error) {
+          console.error("Error storing email:", error);
+          return false;
+        }
+      }
+      
+      // Hero form submission
+      const heroForm = document.getElementById('hero-email-form');
+      const heroInput = document.getElementById('hero-email-input');
+      const heroSubmitBtn = document.getElementById('hero-submit-btn');
+      const heroBtnText = document.getElementById('hero-btn-text');
+      const heroBtnLoading = document.getElementById('hero-btn-loading');
+      
+      heroForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = heroInput.value;
+        
+        if (!isValidEmail(email)) {
+          showToast('Invalid Email', 'Please enter a valid email address.', 'error');
+          return;
+        }
+        
+        // Show loading state
+        heroBtnText.classList.add('hidden');
+        heroBtnLoading.classList.remove('hidden');
+        heroSubmitBtn.disabled = true;
+        
+        setTimeout(() => {
+          const success = storeEmail(email, 'hero-form');
+          
+          if (success) {
+            showToast('Success!', 'Thank you for joining our waiting list!');
+            heroInput.value = '';
+          } else {
+            showToast('Error', 'There was a problem saving your email. Please try again.', 'error');
+          }
+          
+          // Reset button state
+          heroBtnText.classList.remove('hidden');
+          heroBtnLoading.classList.add('hidden');
+          heroSubmitBtn.disabled = false;
+        }, 1000);
+      });
+      
+      // Bottom form submission
+      const bottomForm = document.getElementById('bottom-email-form');
+      const bottomInput = document.getElementById('bottom-email-input');
+      const bottomSubmitBtn = document.getElementById('bottom-submit-btn');
+      const bottomBtnText = document.getElementById('bottom-btn-text');
+      const bottomBtnLoading = document.getElementById('bottom-btn-loading');
+      
+      bottomForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = bottomInput.value;
+        
+        if (!isValidEmail(email)) {
+          showToast('Invalid Email', 'Please enter a valid email address.', 'error');
+          return;
+        }
+        
+        // Show loading state
+        bottomBtnText.classList.add('hidden');
+        bottomBtnLoading.classList.remove('hidden');
+        bottomSubmitBtn.disabled = true;
+        
+        setTimeout(() => {
+          const success = storeEmail(email, 'bottom-form');
+          
+          if (success) {
+            showToast('Success!', 'Thank you for joining our waiting list!');
+            bottomInput.value = '';
+          } else {
+            showToast('Error', 'There was a problem saving your email. Please try again.', 'error');
+          }
+          
+          // Reset button state
+          bottomBtnText.classList.remove('hidden');
+          bottomBtnLoading.classList.add('hidden');
+          bottomSubmitBtn.disabled = false;
+        }, 1000);
+      });
+      
+      // Email capture modal
+      const emailModal = document.getElementById('email-modal');
+      const modalOpenButtons = document.querySelectorAll('.email-capture-open');
+      const modalCloseButton = document.getElementById('modal-close');
+      const fixedJoinBtn = document.getElementById('fixed-join-btn');
+      
+      function openModal() {
+        emailModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+      }
+      
+      function closeModal() {
+        emailModal.classList.add('hidden');
+        document.body.style.overflow = ''; // Re-enable scrolling
+      }
+      
+      modalOpenButtons.forEach(button => {
+        button.addEventListener('click', openModal);
+      });
+      
+      fixedJoinBtn.addEventListener('click', openModal);
+      
+      modalCloseButton.addEventListener('click', closeModal);
+      
+      // Close on click outside
+      emailModal.addEventListener('click', function(e) {
+        if (e.target === emailModal) {
+          closeModal();
+        }
+      });
+      
+      // Modal form submission
+      const modalForm = document.getElementById('modal-email-form');
+      const modalInput = document.getElementById('modal-email-input');
+      const modalSubmitBtn = document.getElementById('modal-submit-btn');
+      const modalBtnText = document.getElementById('modal-btn-text');
+      const modalBtnLoading = document.getElementById('modal-btn-loading');
+      
+      modalForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = modalInput.value;
+        
+        if (!isValidEmail(email)) {
+          showToast('Invalid Email', 'Please enter a valid email address.', 'error');
+          return;
+        }
+        
+        // Show loading state
+        modalBtnText.classList.add('hidden');
+        modalBtnLoading.classList.remove('hidden');
+        modalSubmitBtn.disabled = true;
+        
+        setTimeout(() => {
+          const success = storeEmail(email, 'modal-form');
+          
+          if (success) {
+            showToast('Success!', 'Thank you for joining our waiting list!');
+            modalInput.value = '';
+            closeModal();
+          } else {
+            showToast('Error', 'There was a problem saving your email. Please try again.', 'error');
+          }
+          
+          // Reset button state
+          modalBtnText.classList.remove('hidden');
+          modalBtnLoading.classList.add('hidden');
+          modalSubmitBtn.disabled = false;
+        }, 1000);
+      });
+      
+      // FAQ accordions
+      const faqItems = document.querySelectorAll('.faq-item');
+      
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        const icon = question.querySelector('i');
+        
+        question.addEventListener('click', function() {
+          const isOpen = answer.classList.contains('max-h-96');
+          
+          // Close all FAQs
+          faqItems.forEach(otherItem => {
+            const otherAnswer = otherItem.querySelector('.faq-answer');
+            const otherIcon = otherItem.querySelector('.faq-question i');
+            
+            otherAnswer.classList.remove('max-h-96', 'opacity-100');
+            otherAnswer.classList.add('max-h-0', 'opacity-0');
+            otherIcon.classList.remove('rotate-180');
+          });
+          
+          // If current was not open, open it
+          if (!isOpen) {
+            answer.classList.remove('max-h-0', 'opacity-0');
+            answer.classList.add('max-h-96', 'opacity-100');
+            icon.classList.add('rotate-180');
+          }
+        });
+      });
+      
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80, // Offset for fixed header
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+      
+      // Admin Panel Logic
+      const adminPanel = document.getElementById('admin-panel');
+      const emailList = document.getElementById('email-list');
+      const copyEmailsBtn = document.getElementById('copy-emails');
+      const downloadEmailsBtn = document.getElementById('download-emails');
+      const clearEmailsBtn = document.getElementById('clear-emails');
+      
+      // Check for admin access via URL hash
+      function checkAdminAccess() {
+        if (window.location.hash === '#admin') {
+          document.body.classList.add('admin-mode');
+          adminPanel.classList.remove('hidden');
+          document.querySelector('main')?.classList.add('hidden');
+          fixedJoinBtn.classList.add('hidden');
+          renderEmailList();
+        } else {
+          document.body.classList.remove('admin-mode');
+          adminPanel.classList.add('hidden');
+          document.querySelector('main')?.classList.remove('hidden');
+          fixedJoinBtn.classList.remove('hidden');
+        }
+      }
+      
+      // Check on initial load and hash changes
+      checkAdminAccess();
+      window.addEventListener('hashchange', checkAdminAccess);
+      
+      // Render email list in admin panel
+      function renderEmailList() {
+        try {
+          const storedEmails = JSON.parse(localStorage.getItem('capturedEmails') || '[]');
+          
+          if (storedEmails.length === 0) {
+            emailList.innerHTML = `
+              <tr class="email-empty-state">
+                <td colspan="3" class="py-8 text-center text-muted-foreground">
+                  <i class="fa-regular fa-envelope-open text-2xl mb-2"></i>
+                  <p>No emails captured yet</p>
+                </td>
+              </tr>
+            `;
+            return;
+          }
+          
+          emailList.innerHTML = '';
+          
+          storedEmails.forEach((item, index) => {
+            const date = new Date(item.timestamp);
+            const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+            
+            const row = document.createElement('tr');
+            row.className = index % 2 === 0 ? 'bg-secondary/30' : '';
+            row.innerHTML = `
+              <td class="py-2">${item.email}</td>
+              <td class="py-2">${item.source}</td>
+              <td class="py-2">${formattedDate}</td>
+            `;
+            
+            emailList.appendChild(row);
+          });
+        } catch (error) {
+          console.error("Error rendering email list:", error);
+          emailList.innerHTML = `
+            <tr>
+              <td colspan="3" class="py-4 text-center text-red-500">
+                Error loading emails: ${error.message}
+              </td>
+            </tr>
+          `;
+        }
+      }
+      
+      // Copy all emails to clipboard
+      copyEmailsBtn.addEventListener('click', function() {
+        try {
+          const storedEmails = JSON.parse(localStorage.getItem('capturedEmails') || '[]');
+          
+          if (storedEmails.length === 0) {
+            showToast('Nothing to copy', 'No emails have been captured yet.', 'error');
+            return;
+          }
+          
+          // Extract just the email addresses
+          const emailsText = storedEmails.map(item => item.email).join('\n');
+          
+          // Copy to clipboard
+          navigator.clipboard.writeText(emailsText)
+            .then(() => {
+              showToast('Copied!', `${storedEmails.length} email(s) copied to clipboard.`);
+            })
+            .catch(err => {
+              console.error('Failed to copy:', err);
+              showToast('Copy failed', 'Could not copy emails to clipboard.', 'error');
+            });
+          
+        } catch (error) {
+          console.error("Error copying emails:", error);
+          showToast('Error', 'Failed to copy emails.', 'error');
+        }
+      });
+      
+      // Download emails as CSV
+      downloadEmailsBtn.addEventListener('click', function() {
+        try {
+          const storedEmails = JSON.parse(localStorage.getItem('capturedEmails') || '[]');
+          
+          if (storedEmails.length === 0) {
+            showToast('Nothing to download', 'No emails have been captured yet.', 'error');
+            return;
+          }
+          
+          // Create CSV content
+          let csvContent = "Email,Source,Timestamp\n";
+          
+          storedEmails.forEach(item => {
+            csvContent += `${item.email},${item.source},${item.timestamp}\n`;
+          });
+          
+          // Create download link
+          const blob = new Blob([csvContent], { type: 'text/csv' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.setAttribute('href', url);
+          a.setAttribute('download', 'captured_emails.csv');
+          a.style.display = 'none';
+          
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          
+          showToast('Downloaded!', `${storedEmails.length} email(s) exported to CSV.`);
+          
+        } catch (error) {
+          console.error("Error downloading emails:", error);
+          showToast('Error', 'Failed to download emails.', 'error');
+        }
+      });
+      
+      // Clear all emails
+      clearEmailsBtn.addEventListener('click', function() {
+        if (confirm('Are you sure you want to delete all captured emails? This cannot be undone.')) {
+          localStorage.removeItem('capturedEmails');
+          renderEmailList();
+          showToast('Cleared', 'All captured emails have been deleted.');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
