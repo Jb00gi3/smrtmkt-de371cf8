@@ -1,4 +1,3 @@
-
 interface FooterSectionProps {
   hideSections?: boolean;
 }
@@ -10,11 +9,11 @@ export function FooterSection({ hideSections }: FooterSectionProps) {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-md bg-green-600 flex items-center justify-center p-1">
+              <div className="h-8 w-8 rounded-md bg-green-600 flex items-center justify-center">
                 <img 
                   src="/lovable-uploads/5479986f-bcff-40af-bef0-8072e0ff9c02.png" 
                   alt="Smrt Mkt Logo" 
-                  className="w-full h-full object-contain" 
+                  className="w-6 h-6" 
                 />
               </div>
               <span className="text-xl font-medium">Smrt Mkt</span>
