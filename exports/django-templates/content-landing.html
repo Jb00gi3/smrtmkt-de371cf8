@@ -164,32 +164,26 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="bg-white p-6 rounded-xl shadow-sm border border-border">
-        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4 text-primary">
-          <i class="fa-solid fa-list-check text-xl"></i>
-        </div>
-        <h3 class="text-xl font-semibold mb-2">Create Your Shopping List</h3>
-        <p class="text-muted-foreground">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3 class="step-title">Create Your Shopping List</h3>
+        <p class="step-description">
           Add items to your shopping list by category. Include as much detail as you want.
         </p>
       </div>
 
-      <div class="bg-white p-6 rounded-xl shadow-sm border border-border">
-        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4 text-primary">
-          <i class="fa-solid fa-magnifying-glass-dollar text-xl"></i>
-        </div>
-        <h3 class="text-xl font-semibold mb-2">Compare Prices</h3>
-        <p class="text-muted-foreground">
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3 class="step-title">Compare Prices</h3>
+        <p class="step-description">
           Our algorithm searches for the best prices across all stores in your area.
         </p>
       </div>
 
-      <div class="bg-white p-6 rounded-xl shadow-sm border border-border">
-        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4 text-primary">
-          <i class="fa-solid fa-wallet text-xl"></i>
-        </div>
-        <h3 class="text-xl font-semibold mb-2">Save Money</h3>
-        <p class="text-muted-foreground">
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3 class="step-title">Save Money</h3>
+        <p class="step-description">
           See exactly how much you'll save at each store and optimize your shopping trip.
         </p>
       </div>
@@ -270,40 +264,62 @@
 <!-- FAQ Section -->
 <section id="faq" class="py-16 bg-secondary/30">
   <div class="container mx-auto px-4 md:px-6">
-    <div class="text-center mb-12">
+    <div class="text-center mb-16">
       <h2 class="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
       <p class="text-muted-foreground max-w-2xl mx-auto">
         Got questions? We've got answers. If you can't find what you're looking for, feel free to contact us.
       </p>
     </div>
 
-    <div class="max-w-3xl mx-auto space-y-4">
-      <div class="bg-white p-6 rounded-xl shadow-sm border border-border">
-        <h3 class="text-lg font-semibold mb-2">How accurate are the prices?</h3>
-        <p class="text-muted-foreground">
-          We update our prices daily from multiple sources to ensure accuracy. However, prices can sometimes change before we update our database. We always recommend verifying the price at the store.
-        </p>
-      </div>
+    <div class="max-w-3xl mx-auto">
+      <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-border">
+        <button class="faq-question">
+          <span class="text-lg">How accurate are the prices?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>
+            We update our prices daily from multiple sources to ensure accuracy. However, prices can sometimes change before we update our database. We always recommend verifying the price at the store.
+          </p>
+        </div>
 
-      <div class="bg-white p-6 rounded-xl shadow-sm border border-border">
-        <h3 class="text-lg font-semibold mb-2">How many stores do you compare?</h3>
-        <p class="text-muted-foreground">
-          We compare prices from all major grocery chains and many local stores in your area. On average, we compare 8-12 stores per location, but this can vary depending on your zip code.
-        </p>
-      </div>
+        <button class="faq-question">
+          <span class="text-lg">How many stores do you compare?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>
+            We compare prices from all major grocery chains and many local stores in your area. On average, we compare 8-12 stores per location, but this can vary depending on your zip code.
+          </p>
+        </div>
 
-      <div class="bg-white p-6 rounded-xl shadow-sm border border-border">
-        <h3 class="text-lg font-semibold mb-2">Is ShopSmart free to use?</h3>
-        <p class="text-muted-foreground">
-          Yes! Basic features are completely free. We also offer a premium version with additional features like price history, automatic deal alerts, and more detailed price breakdowns.
-        </p>
-      </div>
+        <button class="faq-question">
+          <span class="text-lg">Is ShopSmart free to use?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Yes! Basic features are completely free. We also offer a premium version with additional features like price history, automatic deal alerts, and more detailed price breakdowns.
+          </p>
+        </div>
 
-      <div class="bg-white p-6 rounded-xl shadow-sm border border-border">
-        <h3 class="text-lg font-semibold mb-2">Do you have an app?</h3>
-        <p class="text-muted-foreground">
-          Yes, we have mobile apps for both iOS and Android. You can download them from the App Store or Google Play Store.
-        </p>
+        <button class="faq-question">
+          <span class="text-lg">Do you have an app?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Yes, we have mobile apps for both iOS and Android. You can download them from the App Store or Google Play Store.
+          </p>
+        </div>
       </div>
     </div>
   </div>

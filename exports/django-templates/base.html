@@ -109,6 +109,34 @@
     </div>
   </footer>
 
+  <!-- FAQ Toggle Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get all FAQ items
+      const faqButtons = document.querySelectorAll('.faq-question');
+      
+      // Add click event to each FAQ question
+      faqButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Toggle the 'active' class on the button
+          this.classList.toggle('active');
+          
+          // Find the corresponding answer
+          const answer = this.nextElementSibling;
+          
+          // Toggle the answer visibility
+          if (answer.style.maxHeight) {
+            answer.style.maxHeight = null;
+            answer.style.opacity = '0';
+          } else {
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+            answer.style.opacity = '1';
+          }
+        });
+      });
+    });
+  </script>
+
   {% block extra_scripts %}{% endblock %}
 </body>
 </html>
