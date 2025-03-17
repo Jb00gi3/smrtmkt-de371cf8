@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
@@ -46,13 +45,11 @@ export default function Navbar({ showLandingToggle }: NavbarProps) {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
           <Link to="/landing" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-md bg-green-600 flex items-center justify-center">
-              <img 
-                src="/lovable-uploads/ae0f5a8c-fb59-454d-8485-512ea9b7d4e5.png" 
-                alt="Smrt Mkt Logo" 
-                className="w-6 h-6" 
-              />
-            </div>
+            <img 
+              src="/lovable-uploads/ae0f5a8c-fb59-454d-8485-512ea9b7d4e5.png" 
+              alt="Smrt Mkt Logo" 
+              className="w-8 h-8" 
+            />
             <span className="text-xl font-medium">Smrt Mkt</span>
           </Link>
           

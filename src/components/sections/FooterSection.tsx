@@ -9,13 +9,11 @@ export function FooterSection({ hideSections }: FooterSectionProps) {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-md bg-green-600 flex items-center justify-center">
-                <img 
-                  src="/lovable-uploads/5479986f-bcff-40af-bef0-8072e0ff9c02.png" 
-                  alt="Smrt Mkt Logo" 
-                  className="w-6 h-6" 
-                />
-              </div>
+              <img 
+                src="/lovable-uploads/ae0f5a8c-fb59-454d-8485-512ea9b7d4e5.png" 
+                alt="Smrt Mkt Logo" 
+                className="w-8 h-8" 
+              />
               <span className="text-xl font-medium">Smrt Mkt</span>
             </div>
             <p className="text-muted-foreground text-sm">
