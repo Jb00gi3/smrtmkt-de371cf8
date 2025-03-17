@@ -50,7 +50,7 @@ export default function Navbar({ showLandingToggle }: NavbarProps) {
               <img 
                 src="/lovable-uploads/102606c7-9c54-4763-9022-d1075dcad148.png" 
                 alt="Smrt Mkt Logo" 
-                className="w-6 h-6" 
+                className="w-7 h-7" 
               />
             </div>
             <span className="text-xl font-medium">Smrt Mkt</span>
