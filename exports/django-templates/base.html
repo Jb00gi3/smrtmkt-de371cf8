@@ -18,7 +18,7 @@
     <div class="container navbar-content">
       <a href="{% url 'landing' %}" class="logo">
         <div class="logo-icon">
-          <i class="fa-solid fa-basket-shopping"></i>
+          <img src="{% static 'images/shopping-cart-logo.png' %}" alt="ShopSmart Logo" class="logo-image">
         </div>
         <span class="logo-text">ShopSmart</span>
       </a>
@@ -71,9 +71,7 @@
       <div class="footer-content">
         <div class="footer-brand">
           <div class="footer-logo">
-            <div class="logo-icon">
-              <i class="fa-solid fa-basket-shopping"></i>
-            </div>
+            <img src="{% static 'images/shopping-cart-logo.png' %}" alt="ShopSmart Logo" class="logo-image">
             <span class="logo-text">ShopSmart</span>
           </div>
           <p class="footer-tagline">Save money on your grocery shopping</p>

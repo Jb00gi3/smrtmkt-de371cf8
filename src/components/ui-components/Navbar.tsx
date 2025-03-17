@@ -48,9 +48,9 @@ export default function Navbar({ showLandingToggle }: NavbarProps) {
           <Link to="/landing" className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-md bg-green-600 flex items-center justify-center">
               <img 
-                src="/lovable-uploads/102606c7-9c54-4763-9022-d1075dcad148.png" 
+                src="/lovable-uploads/ae0f5a8c-fb59-454d-8485-512ea9b7d4e5.png" 
                 alt="Smrt Mkt Logo" 
-                className="w-7 h-7" 
+                className="w-6 h-6" 
               />
             </div>
             <span className="text-xl font-medium">Smrt Mkt</span>
