@@ -29,17 +29,38 @@ export function HeroSection({ isLandingPage }: HeroSectionProps) {
     
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      // Get current stored emails or initialize empty array
+      const storedEmails = JSON.parse(localStorage.getItem('capturedEmails') || '[]');
+      
+      // Add new email with timestamp
+      storedEmails.push({
+        email: email.trim(),
+        source: 'hero-form',
+        timestamp: new Date().toISOString()
+      });
+      
+      // Save back to localStorage
+      localStorage.setItem('capturedEmails', JSON.stringify(storedEmails));
+      
       toast({
         title: "Success!",
         description: "Thank you for joining our waiting list!",
       });
+      
+      console.log("Email captured and stored:", email);
+      console.log("All stored emails:", storedEmails);
+    } catch (error) {
+      console.error("Error storing email:", error);
+      toast({
+        title: "Error",
+        description: "There was a problem saving your email. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
       setEmail("");
-    }, 1000);
-    
-    console.log("Email captured:", email);
+    }
   };
 
   return (
