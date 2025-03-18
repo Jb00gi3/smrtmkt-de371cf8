@@ -4,12 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { Mail } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 export function BottomEmailCapture() {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!email.trim() || !email.includes('@')) {
@@ -24,26 +25,21 @@ export function BottomEmailCapture() {
     setIsSubmitting(true);
     
     try {
-      // Get current stored emails or initialize empty array
-      const storedEmails = JSON.parse(localStorage.getItem('capturedEmails') || '[]');
+      // Insert email into Supabase
+      const { error } = await supabase
+        .from('email_interest')
+        .insert([{ email: email.trim() }]);
       
-      // Add new email with timestamp
-      storedEmails.push({
-        email: email.trim(),
-        source: 'bottom-form',
-        timestamp: new Date().toISOString()
-      });
-      
-      // Save back to localStorage
-      localStorage.setItem('capturedEmails', JSON.stringify(storedEmails));
+      if (error) {
+        throw error;
+      }
       
       toast({
         title: "Success!",
         description: "Thank you for joining our waiting list!",
       });
       
-      console.log("Email captured and stored:", email);
-      console.log("All stored emails:", storedEmails);
+      console.log("Email captured and stored in Supabase:", email);
     } catch (error) {
       console.error("Error storing email:", error);
       toast({
