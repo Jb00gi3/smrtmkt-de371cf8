@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -5,6 +6,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}ShopSmart{% endblock %}</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="{% block meta_description %}Find the best deals across multiple stores for your shopping list. Stop overpaying for groceries and save time with ShopSmart's comparison tool.{% endblock %}">
+  <meta name="keywords" content="grocery shopping, price comparison, save money, shopping list, best deals, grocery deals">
+  <meta name="author" content="ShopSmart">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+  <meta property="og:title" content="{% block og_title %}ShopSmart - Save Money on Your Grocery Shopping{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Find the best deals across multiple stores for your shopping list. Stop overpaying for groceries and save time with our smart comparison tool.{% endblock %}">
+  <meta property="og:image" content="{% block og_image %}{% static 'images/og-image.png' %}{% endblock %}">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+  <meta property="twitter:title" content="{% block twitter_title %}ShopSmart - Save Money on Your Grocery Shopping{% endblock %}">
+  <meta property="twitter:description" content="{% block twitter_description %}Find the best deals across multiple stores for your shopping list. Stop overpaying for groceries and save time with our smart comparison tool.{% endblock %}">
+  <meta property="twitter:image" content="{% block twitter_image %}{% static 'images/og-image.png' %}{% endblock %}">
+  
+  <!-- Canonical URL -->
+  <meta rel="canonical" href="{{ request.build_absolute_uri }}">
+  
+  <!-- Robots directive -->
+  <meta name="robots" content="index, follow">
+  
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.ico' %}">
   <!-- FontAwesome for icons -->
