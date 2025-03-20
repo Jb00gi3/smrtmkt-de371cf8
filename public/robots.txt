@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://shopsmart.app/sitemap.xml
+Sitemap: https://www.smrtmkt.com/sitemap.xml
